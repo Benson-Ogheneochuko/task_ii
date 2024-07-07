@@ -34,6 +34,7 @@ export const registerController = async (req, res) => {
       }
     } catch (error) {
       console.error(error.message)
+      res.status(500).json({ error: 'Registration failed', details: error.message });
       throw error
     }
     
