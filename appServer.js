@@ -1,12 +1,15 @@
 import './env.js'
 import { app } from "./index.js";
-import { connnectDatabase, closeDatabase } from "./postgressDB/connectDB.js";
+import { connnectDatabase, closeDatabase, dbMiddleWare } from "./postgressDB/connectDB.js";
+
 
 // Initialize database connection
 connnectDatabase().catch(console.error);
 
 // Export the Express app as a module
-export default app;
+// export default app;
+app.use(dbMiddleWare)
+
 
 // If running locally
 if (process.env.NODE_ENV !== 'production') {

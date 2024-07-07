@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
   res.send('Hello task 2');
 });
 
-app.use(dbMiddleWare)
+// app.use(dbMiddleWare)
 app.use(express.json())
 
 const authPath = '/auth'
