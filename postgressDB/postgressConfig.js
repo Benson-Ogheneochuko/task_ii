@@ -1,12 +1,11 @@
 import pg from 'pg';
-import fs from 'fs'
 import { Sequelize } from 'sequelize';
 import { UserModel } from '../models/UserModel.js'
 import { OrganizationModel } from '../models/OrganizationModel.js'
 import { UsersOrganizationsModel } from '../models/UsersOrganizationsModel.js';
 
-const { DB_USER, DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT } = process.env;
-const ca= fs.readFileSync('./ca.pem').toString()
+const { DB_USER, DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_CA } = process.env;
+const ca= DB_CA
 
 const db_config = {
   user: DB_USER,
