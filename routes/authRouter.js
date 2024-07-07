@@ -6,7 +6,7 @@ import { responseController } from '../controllers/responseController.js'
 
 authRouter
   .route('/register')
-  .post(registerController, validateOrgInput, createOrgController, responseController)
+  .post(registerController)
 
 authRouter
   .route('/login')

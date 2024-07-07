@@ -5,12 +5,12 @@ import { createOrganization } from "../utils/orgMethods.js";
 import { addUserToOrganization } from "../utils/userMethods.js";
 
 // todo:: next will autocreate organization
-export const registerController = async (req, res, next) => {
+export const registerController = async (req, res) => {
   const userData = req.body;
   
   try {
     userData.password= await bcrypt.hash(userData.password, 10)
-    const userToken = await createJWT({email: userData["email"]})
+    const userToken = await createJWT({email: userData["email"], userId: userData.userId})
     if(!userToken) {
       return res.status(401).json({
         status: 'fail',
@@ -75,7 +75,7 @@ export const loginController = async (req, res) => {
     }
 
     delete user.dataValues.password;
-    const userToken = await createJWT({email})
+    const userToken = await createJWT({email, userId: user.userId})
     res.status(200).json({
       status: "success",
       message: "Login successful",
