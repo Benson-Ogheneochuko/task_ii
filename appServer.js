@@ -8,7 +8,7 @@ connnectDatabase().catch(console.error);
 
 // Export the Express app as a module
 // export default app;
-app.use(dbMiddleWare)
+
 
 
 // If running locally
@@ -18,7 +18,7 @@ if (process.env.NODE_ENV !== 'production') {
     console.log(`Server running on port ${PORT}`);
   });
 }
-
+app.use(dbMiddleWare)
 process.on("SIGINT", async () => {
   console.log("Shutting down gracefully");
   await closeDatabase();
