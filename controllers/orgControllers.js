@@ -90,10 +90,10 @@ export const getSingleOrgController= async (req, res)=>{
 
 // get all user orgs those they created and those they belong to
 export const orgListController = async(req, res) => {
-  const {userId} = req.body
+  const {userId} = req.user
 
   try {
-    const orgList= await getOrgList(userId= userId)
+    const orgList= await getOrgList(userId)
     if (!orgList) {
       res.status(404).json({
         status: 'Fail',

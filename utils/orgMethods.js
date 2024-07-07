@@ -1,4 +1,5 @@
 import { OrganizationModel } from "../models/OrganizationModel.js";
+import {UserModel} from "../models/UserModel.js";
 
 // create org Method
 export const createOrganization = async (orgData) => {
