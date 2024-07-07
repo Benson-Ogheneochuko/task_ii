@@ -1,14 +1,12 @@
 import './env.js'
 import { app } from "./index.js";
-import { connnectDatabase, closeDatabase, dbMiddleWare } from "./postgressDB/connectDB.js";
-
+import { connnectDatabase, closeDatabase } from "./postgressDB/connectDB.js";
 
 // Initialize database connection
 connnectDatabase().catch(console.error);
 
 // Export the Express app as a module
 // export default app;
-
 
 
 // If running locally
@@ -18,7 +16,7 @@ if (process.env.NODE_ENV !== 'production') {
     console.log(`Server running on port ${PORT}`);
   });
 }
-app.use(dbMiddleWare)
+
 process.on("SIGINT", async () => {
   console.log("Shutting down gracefully");
   await closeDatabase();
