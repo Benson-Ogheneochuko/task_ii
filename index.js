@@ -4,6 +4,11 @@ import orgRouter from './routes/orgRouter.js'
 import { dbMiddleWare } from './postgressDB/connectDB.js'
 
 export const app = express()
+
+app.get('/', (req, res) => {
+  res.send('Hello task 2');
+});
+
 app.use(dbMiddleWare)
 app.use(express.json())
 
