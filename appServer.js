@@ -6,7 +6,7 @@ import { connnectDatabase, closeDatabase } from "./postgressDB/connectDB.js";
 connnectDatabase().catch(console.error);
 
 // Export the Express app as a module
-// export default app;
+export default app;
 
 
 // If running locally
