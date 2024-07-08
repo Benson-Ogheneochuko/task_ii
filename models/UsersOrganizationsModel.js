@@ -24,6 +24,11 @@ export class UsersOrganizationsModel extends Model {
       modelName: 'UsersOrganizations',
       tableName: 'users_organizations',
       timestamps: false
-    });
+    })
+  }
+
+  static associate(models) {
+    UsersOrganizationsModel.belongsTo(models.UserModel, { foreignKey: 'userId' });
+    UsersOrganizationsModel.belongsTo(models.OrganizationModel, { foreignKey: 'orgId' });
   }
 }

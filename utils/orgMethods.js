@@ -1,6 +1,5 @@
 import { OrganizationModel } from "../models/OrganizationModel.js";
-import {UserModel} from "../models/UserModel.js";
-
+import { UsersOrganizationsModel } from "../models/UsersOrganizationsModel.js";
 // create org Method
 export const createOrganization = async (orgData) => {
   const { name, description = '' } = orgData;
@@ -12,8 +11,9 @@ export const createOrganization = async (orgData) => {
 // get org list method
 export const getOrgList = async (userId) => {
   try {
-    const orgList = await UserModel.findByPk(userId, { 
-      include: OrganizationModel 
+    const orgList = await UsersOrganizationsModel.findAll({
+      where: {userId},
+      include: [{ model: OrganizationModel }]
     });
 
     if (orgList.length === 0) {
@@ -23,7 +23,7 @@ export const getOrgList = async (userId) => {
     return orgList;
   } catch (error) {
     console.error("Error finding organization(s):", error);
-    throw error; // Re-throw to allow handling in the controller
+    throw error;
   }
 };
 
@@ -31,8 +31,8 @@ export const getOrgList = async (userId) => {
 // get single org method - details of a single org
 export const getSingleOrg = async (orgId) => {
   try {
-    const org = await OrganizationModel.findOne(orgId, {
-      include: UserModel
+    const org = await OrganizationModel.findOne({
+      where: {orgId}
     }); 
 
     if (!org) {

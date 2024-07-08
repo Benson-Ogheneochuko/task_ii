@@ -4,7 +4,6 @@ import { createJWT } from "../utils/createJWT.js";
 import { createOrganization } from "../utils/orgMethods.js";
 import { addUserToOrganization } from "../utils/userMethods.js";
 
-// todo:: next will autocreate organization
 export const registerController = async (req, res) => {
   const userData = req.body;
   
@@ -57,7 +56,6 @@ export const registerController = async (req, res) => {
   }
 };
 
-// todo:: next will select organization to interact with
 export const loginController = async (req, res) => {
   console.log("login controller");
   const { email, password } = req.body;

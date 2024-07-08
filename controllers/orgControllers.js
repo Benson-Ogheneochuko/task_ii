@@ -3,7 +3,7 @@ import { getSingleOrg, getOrgList, createOrganization } from "../utils/orgMethod
 // http handler for creating org
 export const createOrgController = async (req, res) => {
   try {
-    const organization = await createOrganization(req.validatedOrgData);
+    const organization = await createOrganization(req.body);
 
     res.status(201).json({
       status: "success",
@@ -25,38 +25,25 @@ export const createOrgController = async (req, res) => {
 };
 
 // check source & validate org data in request middleware
-export const validateOrgInput = (req, res, next) => {
-  let { name, description } = req.body;
+// export const validateOrgInput = (req, res, next) => {
+//   let { name, description } = req.body;
 
-  if (res.locals.isFromRegistration && name) {
-    name = `${name}'s organization`;
-  }
+//   if (res.locals.isFromRegistration && name) {
+//     name = `${name}'s organization`;
+//   }
 
-  if (!name) {
-    return res.status(400).json({
-      status: "Bad Request",
-      message: "Client error",
-      statusCode: 400,
-    });
-  }
+//   if (!name) {
+//     return res.status(400).json({
+//       status: "Bad Request",
+//       message: "Client error",
+//       statusCode: 400,
+//     });
+//   }
 
-  req.validatedOrgData = { name, description };
-  next();
-};
-// !End of create org
+//   req.validatedOrgData = { name, description };
+//   next();
+// };
 
-
-
-
-
-
-
-
-
-
-
-
- 
 
 // get single orgnizations with orgId
 export const getSingleOrgController= async (req, res)=>{
