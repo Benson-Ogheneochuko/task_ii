@@ -24,27 +24,6 @@ export const createOrgController = async (req, res) => {
   }
 };
 
-// check source & validate org data in request middleware
-// export const validateOrgInput = (req, res, next) => {
-//   let { name, description } = req.body;
-
-//   if (res.locals.isFromRegistration && name) {
-//     name = `${name}'s organization`;
-//   }
-
-//   if (!name) {
-//     return res.status(400).json({
-//       status: "Bad Request",
-//       message: "Client error",
-//       statusCode: 400,
-//     });
-//   }
-
-//   req.validatedOrgData = { name, description };
-//   next();
-// };
-
-
 // get single orgnizations with orgId
 export const getSingleOrgController= async (req, res)=>{
   const {orgId} = req.params
@@ -80,8 +59,8 @@ export const orgListController = async(req, res) => {
   const {userId} = req.user
 
   try {
-    const orgList= await getOrgList(userId)
-    if (!orgList) {
+    const organisations= await getOrgList(userId)
+    if (!organisations) {
       res.status(404).json({
         status: 'Fail',
         message: 'could not find user organizations'
@@ -92,7 +71,7 @@ export const orgListController = async(req, res) => {
       status: 'success',
       message: 'user organization list',
       data: {
-        orgList
+        organisations
       }
     })
   } catch (error) {

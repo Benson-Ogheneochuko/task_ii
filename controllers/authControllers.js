@@ -9,7 +9,8 @@ export const registerController = async (req, res) => {
   
   try {
     userData.password= await bcrypt.hash(userData.password, 10)
-    const userToken = await createJWT({email: userData["email"], userId: userData.userId})
+    const user = await UserModel.create(userData);
+    const userToken = await createJWT({email: user["email"], userId: user.userId})
     if(!userToken) {
       return res.status(401).json({
         status: 'fail',
@@ -19,10 +20,9 @@ export const registerController = async (req, res) => {
         }
       })
     }
-    const user = await UserModel.create(userData);
 
     try {
-      const userOrg =  await createOrganization({name: `${userData.firstName}'s Organisation`, description: 'default organisation'})
+      const userOrg =  await createOrganization({name: `${user.firstName}'s Organisation`, description: 'default organisation'})
       await addUserToOrganization(user.userId, userOrg.orgId)
 
       if (!userOrg){
